@@ -18,3 +18,10 @@
     - After inputting each costs/expense, the program should display "Income", "Money spent", and "Balance (Income-money spent)"
 """
 
+# Xpense tracker
+action = input("""Welcome to Xpense tracker! What would you like to do today? Options are as follows: \n 
+                -Add expenses to an existing sheet \n 
+                -Remove expenses from an existing sheet \n
+                -Create a new expenses sheet \n 
+                -Delete a current expenses sheet \n 
+                -Examine expenses across multiple sheets: \n""")
