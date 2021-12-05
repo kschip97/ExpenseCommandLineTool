@@ -42,21 +42,28 @@ if (action == "NS"):
 
     askPay = input("Are your paychecks for the same amount as last month? [y] or [n] ")
 
-    if (askPay == "y"):
-        payVal = input("How much money do you take home from each paycheck? ")
+    if (askPay == "n"):
+        # collect information on pay
+        payVal = input("How much money do you expect to take home from each paycheck?   ")
         payVal = float(payVal)
-        numChecks = input("How many paychecks are you expecting to receive this month?")
-        numChecks = float(numChecks)
+        numChecks = input("How many paychecks are you expecting to receive this month?  ")
+        numChecks = int(numChecks)
         MonthNum = input("What is the number corresponding to this month (1-12):    ")
         Year = input("What is the year?:    ")
-        for (i in numChecks):
-            Amount_cell = "F" + i+4
-            Memo_cell = "D" + i+4
-            Date_cell = "E" + i+4
+        for i in range(numChecks):
+            Amount_cell = "F" + str(i+4)
+            Memo_cell = "D" + str(i+4)
+            Date_cell = "E" + str(i+4)
             wb_sheet[Amount_cell] = payVal
             wb_sheet[Memo_cell] = "Salary"
-            wb_sheet[Date_cell] = Year + "-" + MonthNum + "-" + "1"
+            wb_sheet[Date_cell] = MonthNum + "/1/" + Year
+        wb.save(wbPath)
+        print("Awesome! We've inputted this data into your new sheet called " + sheetname)
 
-    wb.save(wbPath)
+    
+    else:
+        wb.save(wbPath)
+
+    
     
     
