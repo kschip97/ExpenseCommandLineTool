@@ -20,8 +20,10 @@
 
 # Xpense tracker
 action = input("""Welcome to Xpense tracker! What would you like to do today? Options are as follows: \n 
-                -Add expenses to an existing sheet \n 
-                -Remove expenses from an existing sheet \n
-                -Create a new expenses sheet \n 
-                -Delete a current expenses sheet \n 
-                -Examine expenses across multiple sheets: \n""")
+                -Add expenses to an existing sheet [AE] \n 
+                -Remove expenses from an existing sheet [RE] \n
+                -Create a new expenses sheet [NS] \n 
+                -Delete a current expenses sheet [DS] \n 
+                -Examine expenses across multiple sheets [EE]: \n""")
+
+print(action)
