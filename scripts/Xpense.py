@@ -17,6 +17,7 @@
     - Same for Income for columns D, E and F, respectively
     - After inputting each costs/expense, the program should display "Income", "Money spent", and "Balance (Income-money spent)"
 """
+from openpyxl import load_workbook
 
 # Xpense tracker
 action = input("""Welcome to Xpense tracker! What would you like to do today? Options are as follows: \n 
@@ -26,4 +27,36 @@ action = input("""Welcome to Xpense tracker! What would you like to do today? Op
                 -Delete a current expenses sheet [DS] \n 
                 -Examine expenses across multiple sheets [EE]: \n""")
 
-print(action)
+wbPath = "C:\\Users\\keess\\Desktop\\2021_Budget_spreadsheet.xlsx"
+# loading workbook to insert new sheets
+wb = load_workbook(wbPath)
+
+if (action == "NS"):
+    print("Current sheet names: ")
+    print(wb.sheetnames)
+    sheetName = input("What would you like to name your new sheet?: ")
+    target = wb['template']
+    wb.copy_worksheet(target)
+    wb_sheet = wb["template Copy"]
+    wb_sheet.title = sheetName
+
+    askPay = input("Are your paychecks for the same amount as last month? [y] or [n] ")
+
+    if (askPay == "y"):
+        payVal = input("How much money do you take home from each paycheck? ")
+        payVal = float(payVal)
+        numChecks = input("How many paychecks are you expecting to receive this month?")
+        numChecks = float(numChecks)
+        MonthNum = input("What is the number corresponding to this month (1-12):    ")
+        Year = input("What is the year?:    ")
+        for (i in numChecks):
+            Amount_cell = "F" + i+4
+            Memo_cell = "D" + i+4
+            Date_cell = "E" + i+4
+            wb_sheet[Amount_cell] = payVal
+            wb_sheet[Memo_cell] = "Salary"
+            wb_sheet[Date_cell] = Year + "-" + MonthNum + "-" + "1"
+
+    wb.save(wbPath)
+    
+    
