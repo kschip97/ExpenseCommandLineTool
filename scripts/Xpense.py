@@ -20,7 +20,6 @@
 from openpyxl import load_workbook
 from openpyxl.styles import NamedStyle
 
-
 # set up date style
 date_style = NamedStyle(name='datetime', number_format='YYYY-MM-DD')
 
@@ -34,7 +33,7 @@ action = input("""Welcome to Xpense tracker! What would you like to do today? Op
 
 wbPath = "C:\\Users\\keess\\Desktop\\2021_Budget_spreadsheet.xlsx"
 # loading workbook to insert new sheets
-wb = load_workbook(wbPath)
+wb = load_workbook(wbPath,)
 
 if (action == "NS"):
     print("Current sheet names: ")
@@ -83,7 +82,6 @@ if (action == "NS"):
         Date_cell = "B4"
         wb_sheet[Date_cell] = MonthNum + "/1/" + Year
         wb_sheet[Amount_cell] = float(rentVal)
-        wb_sheet[Amount_cell].number_format = '0.00E+00'
 
     else:
         Date_cell = "B4"
@@ -101,6 +99,7 @@ if (action == "AE"):
     inputType = input("Would you like to add expenses (type in 1) or income (type in 2)?    ")
     inputType = int(inputType)
 
+    # adding expenses
     if (inputType == 1):
         
         while True:
@@ -119,11 +118,21 @@ if (action == "AE"):
             sheet[memo_cell] = exp_memo
             sheet[date_cell] = exp_date
             sheet[date_cell].style = 'datetime'
-            sheet.write_number(amount_cell, exp_amount)
+            sheet[amount_cell] = float(exp_amount)
 
-            
+            # checking values previously entered for expenses
+            for i in range(4, int(row)+1):
+                disp_row = i
+                memo_cell = "A" + str(disp_row)
+                date_cell = "B" + str(disp_row)
+                amount_cell = "C" + str(disp_row)
+
+                print(sheet[memo_cell].value + "  " + sheet[date_cell].value + "    " + str(sheet[amount_cell].value))
 
             stopCondition = input("would you like to keep inputting expenses? [y] to continue or [n] to quit    ")
             if (stopCondition == "n"):
                 break
+
+            
+
 wb.save(wbPath) 
