@@ -19,17 +19,20 @@
 """
 from openpyxl import load_workbook
 from openpyxl.styles import NamedStyle
+from easygui import *
+import sys
 
 # set up date style
 date_style = NamedStyle(name='datetime', number_format='YYYY-MM-DD')
 
 # Xpense tracker
 action = input("""Welcome to Xpense tracker! What would you like to do today? Options are as follows: \n 
-                -Add expenses or income to an existing sheet [AE] \n 
-                -Remove expenses or income from an existing sheet [RE] \n
-                -Create a new expenses sheet [NS] \n 
-                -Delete a current expenses sheet [DS] \n 
-                -Examine expenses across multiple sheets [EE]: \n""")
+-Add expenses or income to an existing sheet [AE] \n 
+-Remove expenses or income from an existing sheet [RE] \n
+-Create a new expenses sheet [NS] \n 
+-Delete a current expenses sheet [DS] \n 
+-Examine expenses across multiple sheets [EE]: \n
+-If you would like to quit, type 'QUIT'""")
 
 wbPath = "C:\\Users\\keess\\Desktop\\2021_Budget_spreadsheet.xlsx"
 # loading workbook to insert new sheets
