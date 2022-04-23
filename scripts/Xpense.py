@@ -22,12 +22,14 @@ from openpyxl.styles import NamedStyle
 import easygui
 import sys
 
-# set up date style
 date_style = NamedStyle(name='datetime', number_format='YYYY-MM-DD')
+# Creating main() function as framework for making code more readable
 
-# Xpense tracker
+def main():
+
+# User input determines what function is called depending on the task being done
 action = easygui.buttonbox("""Welcome to Xpense tracker! What would you like to do today?""", 'Action', 
-('Add Expense', 'Remove expenses', 'Make New Sheet', 'Delete Expense Sheet', 'Compare Multiple Sheets'))
+('Add Expense/Income', 'Remove Expense/Income', 'Make New Expense Sheet', 'Delete Expense Sheet', 'Compare Multiple Sheets'))
 
 wbPath = "C:\\Users\\keess\\Desktop\\2021_Budget_spreadsheet.xlsx"
 # loading workbook to insert new sheets
