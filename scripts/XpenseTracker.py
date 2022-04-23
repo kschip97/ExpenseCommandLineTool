@@ -27,7 +27,36 @@ date_style = NamedStyle(name='datetime', number_format='YYYY-MM-DD')
 
 def main():
 
-    # User input determines what function is called depending on the task being done
-    action = easygui.buttonbox("Welcome to Xpense tracker! What would you like to do today?", 'Action', 
-    ('Add Expense/Income', 'Remove Expense/Income', 'Make New Expense Sheet', 'Delete Expense Sheet', 'Compare Multiple Sheets', 'Create New Expense Workbook'))
+    While True:
+        # User input determines what function is called depending on the task being done
+        action = easygui.buttonbox("Welcome to Xpense tracker! What would you like to do today?", 'Action', 
+        ('Add Expense/Income', 'Remove Expense/Income', 'Make New Expense Sheet', 'Delete Expense Sheet', 'Compare Expense Sheets', 'Create New Expense Workbook'))
 
+        if (action == 'Add Expense/Income'):
+            AddExpenseOrIncome() # TODO: this function needs to be built
+
+        elif (action == 'Remove Expense/Income'):
+            RemoveExpenseOrIncome() # TODO: this function needs to be built
+        
+        elif (action == 'Make New Expense Sheet'):
+            MakeExpenseSheet() # TODO: this function needs to be built
+
+        elif (action == 'Delete Expense Sheet'):
+            DeleteExpenseSheet() # TODO: this function needs to be built
+
+        elif (action == 'Compare Expense Sheets'):
+            CompareExpenseSheets() # TODO: this function needs to be built
+        
+        elif (action == 'Create New Expense Workbook'):
+            CreateNewExpenseWorkbook() # TODO: this function needs to be built
+
+        else:
+            print("Please enter a valid response from the options in the dialog box") # TODO: this function needs to be built
+    
+
+    
+
+
+    
+
+    
