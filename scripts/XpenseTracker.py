@@ -65,22 +65,47 @@ def CreateNewExpenseWorkbook():
     print("Here is the folder where you can find you new expenses workbook")
     print(os.getcwd())
     wb = Workbook()
+    wbFile = wbName + '.xlsx'
 
     MakeExpenseSheet(wb)
 
+    if ('Sheet' in wb.sheetnames):
+        del wb['Sheet']
+
+    wb.save(wbFile)
+
 
 def MakeExpenseSheet(xlsxWorkbook):
-
+    
     newSheet = True
     while newSheet:
         print("What would you like to call your new expense sheet?")
         sheetName = input(">    ")
-
         xlsxWorkbook.create_sheet(sheetName)
+
+        # Set up formatting of your sheet
+        ws = xlsxWorkbook[sheetName]
+        ws['A1'] = sheetName
+        ws.merge_cells('A1:F1')
+        ws['A2'] = 'Costs'
+        ws['D2'] = 'Income'
+        ws.merge_cells('A2:C2')
+        ws.merge_cells('D2:F2')
+        ws['A3'] = 'Memo'
+        ws['B3'] = 'Date'
+        ws['C3'] = 'Amount'
+        ws['D3'] = 'Memo'
+        ws['E3'] = 'Date'
+        ws['F3'] = 'Amount'
+        ws['H3'] = 'Balance'
+        ws['I3'] = 'Spent'
+        ws['J3'] = 'Income'
 
         print("would you like to make any other new sheets in your workbook? 'y' or 'n'")
         anotherSheet = input(">    ").lower()
 
+
+        ValidInput = False
         while ValidInput == False:
             if (anotherSheet == "y"):
                 ValidInput = True
