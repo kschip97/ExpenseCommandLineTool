@@ -69,7 +69,28 @@ def CreateNewExpenseWorkbook():
     MakeExpenseSheet(wb)
 
 
-def CreateNewExpenseWorksheet(workbook):
+def MakeExpenseSheet(xlsxWorkbook):
+
+    newSheet = True
+    while newSheet:
+        print("What would you like to call your new expense sheet?")
+        sheetName = input(">    ")
+
+        xlsxWorkbook.create_sheet(sheetName)
+
+        print("would you like to make any other new sheets in your workbook? 'y' or 'n'")
+        anotherSheet = input(">    ").lower()
+
+        while ValidInput == False:
+            if (anotherSheet == "y"):
+                ValidInput = True
+                continue
+            elif (anotherSheet == "n"):
+                ValidInput = True
+                newSheet = False
+            else:
+                print("Invalid response. Please enter 'y' to make another sheet or 'n' to stop making sheets.")
+
 
 
 
