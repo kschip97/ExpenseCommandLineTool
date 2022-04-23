@@ -19,8 +19,10 @@
 """
 from openpyxl import load_workbook
 from openpyxl.styles import NamedStyle
+from openpyxl import Workbook
 import easygui
 import sys
+import os
 
 date_style = NamedStyle(name='datetime', number_format='YYYY-MM-DD')
 # Creating main() function as framework for making code more readable
@@ -55,6 +57,20 @@ def main():
     
 
     
+def CreateNewExpenseWorkbook():
+
+    print("Your expenses spreadsheet will be saved in the same directory where you run XpenseTracker.py")
+    print("What would you like to call your expenses workbook?")
+    wbName = input(">   ")
+    print("Here is the folder where you can find you new expenses workbook")
+    print(os.getcwd())
+    wb = Workbook()
+
+    MakeExpenseSheet(wb)
+
+
+def CreateNewExpenseWorksheet(workbook):
+
 
 
     
