@@ -19,26 +19,21 @@
 """
 from openpyxl import load_workbook
 from openpyxl.styles import NamedStyle
-from easygui import *
+import easygui
 import sys
 
 # set up date style
 date_style = NamedStyle(name='datetime', number_format='YYYY-MM-DD')
 
 # Xpense tracker
-action = input("""Welcome to Xpense tracker! What would you like to do today? Options are as follows: \n 
--Add expenses or income to an existing sheet [AE] \n 
--Remove expenses or income from an existing sheet [RE] \n
--Create a new expenses sheet [NS] \n 
--Delete a current expenses sheet [DS] \n 
--Examine expenses across multiple sheets [EE]: \n
--If you would like to quit, type 'QUIT'""")
+action = easygui.buttonbox("""Welcome to Xpense tracker! What would you like to do today?""", 'Action', 
+('Add Expense', 'Remove expenses', 'Make New Sheet', 'Delete Expense Sheet', 'Compare Multiple Sheets'))
 
 wbPath = "C:\\Users\\keess\\Desktop\\2021_Budget_spreadsheet.xlsx"
 # loading workbook to insert new sheets
 wb = load_workbook(wbPath,)
 
-if (action == "NS"):
+if (action == "Make New Sheet"):
     print("Current sheet names: ")
     print(wb.sheetnames)
     sheetName = input("What would you like to name your new sheet?: ")
@@ -93,17 +88,17 @@ if (action == "NS"):
     wb.save(wbPath) 
     print("Awesome! We've inputted this data into your new sheet called " + sheetName)
 
-if (action == "AE"):
+if (action == "Add Expense"):
     # ask if the user wants to add expenses or income
     print("Current sheet names: ")
     print(wb.sheetnames)
-    sheetName = input("What sheet would you like to work in?    ")
+    sheetName = easygui.buttonbox("What sheet would you like to work in?", "sheets", wb.sheetnames)
     sheet = wb[sheetName]
-    inputType = input("Would you like to add expenses (type in 1) or income (type in 2)?    ")
+    inputType = input("Would you like to add expenses or income?", 'type of entry', ('expenses', 'income'))
     inputType = int(inputType)
 
     # adding expenses
-    if (inputType == 1):
+    if (inputType == 'expenses'):
         
         while True:
             
@@ -133,6 +128,37 @@ if (action == "AE"):
                 print(sheet[memo_cell].value + "  " + sheet[date_cell].value + "    " + str(sheet[amount_cell].value))
 
             stopCondition = input("would you like to keep inputting expenses? [y] to continue or [n] to quit    ")
+            if (stopCondition == "n"):
+                break
+    
+    if (inputType == 'income'):
+        
+        while True:
+
+            max_row_income = max((inc.row for inc in sheet['D'] if inc.value is not None))
+
+            memo_cell = "D" + row
+            date_cell = "E" + row
+            amount_cell = "C" + row
+
+            inc_memo = input("Input this income's memo:   ")
+            inc_date = input("Input this income's date in YYYY-MM-DD format:    ")
+            exp_amount = input("Input the income amount:    ")
+
+            sheet[memo_cell] = inc_memo
+            sheet[date_cell] = inc_date
+            sheet[date_cell].style = 'datetime'
+            sheet[amount_cell] = float(inc_amount)
+
+            for i in range(4, int(row)+1):
+                disp_row = i
+                memo_cell = "D" + str(disp_row)
+                date_cell = "E" + str(disp_row)
+                amount_cell = "F" + str(disp_row)
+
+                print(sheet[memo_cell].value + "  " + sheet[date_cell].value + "  " + str(sheet[amount_cell].value))
+
+            stopCondition = easygui.ynbox("would you like to keep inputting expenses?", 'Choice', ('yes', 'no'))
             if (stopCondition == "n"):
                 break
 
