@@ -104,6 +104,7 @@ if (action == "Add Expense"):
             max_row_expense = max((exp.row for exp in sheet['A'] if exp.value is not None))
             row = str(max_row_expense + 1)
 
+            # combining string + row number to correspond to the cell where text is going to end up (memo - date - amount)
             memo_cell = "A" + row
             date_cell = "B" + row
             amount_cell = "C" + row
@@ -135,14 +136,15 @@ if (action == "Add Expense"):
         while True:
 
             max_row_income = max((inc.row for inc in sheet['D'] if inc.value is not None))
+            row = str(max_row_income + 1)
 
             memo_cell = "D" + row
             date_cell = "E" + row
-            amount_cell = "C" + row
+            amount_cell = "F" + row
 
             inc_memo = input("Input this income's memo:   ")
             inc_date = input("Input this income's date in YYYY-MM-DD format:    ")
-            exp_amount = input("Input the income amount:    ")
+            inc_amount = input("Input the income amount:    ")
 
             sheet[memo_cell] = inc_memo
             sheet[date_cell] = inc_date
@@ -157,7 +159,7 @@ if (action == "Add Expense"):
 
                 print(sheet[memo_cell].value + "  " + str(sheet[date_cell].value) + "  " + str(sheet[amount_cell].value))
 
-            stopCondition = easygui.ynbox("would you like to keep inputting expenses?", 'Choice', ('yes', 'no'))
+            stopCondition = input("would you like to keep inputting expenses? [y] to continue or [n] to quit    ")
             if (stopCondition == "n"):
                 break
 
