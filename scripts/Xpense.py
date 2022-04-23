@@ -94,8 +94,7 @@ if (action == "Add Expense"):
     print(wb.sheetnames)
     sheetName = easygui.buttonbox("What sheet would you like to work in?", "sheets", wb.sheetnames)
     sheet = wb[sheetName]
-    inputType = input("Would you like to add expenses or income?", 'type of entry', ('expenses', 'income'))
-    inputType = int(inputType)
+    inputType = easygui.buttonbox("Would you like to add expenses or income?", 'type of entry', ('expenses', 'income'))
 
     # adding expenses
     if (inputType == 'expenses'):
@@ -125,7 +124,7 @@ if (action == "Add Expense"):
                 date_cell = "B" + str(disp_row)
                 amount_cell = "C" + str(disp_row)
 
-                print(sheet[memo_cell].value + "  " + sheet[date_cell].value + "    " + str(sheet[amount_cell].value))
+                print(sheet[memo_cell].value + "  " + str(sheet[date_cell].value) + "    " + str(sheet[amount_cell].value))
 
             stopCondition = input("would you like to keep inputting expenses? [y] to continue or [n] to quit    ")
             if (stopCondition == "n"):
@@ -156,7 +155,7 @@ if (action == "Add Expense"):
                 date_cell = "E" + str(disp_row)
                 amount_cell = "F" + str(disp_row)
 
-                print(sheet[memo_cell].value + "  " + sheet[date_cell].value + "  " + str(sheet[amount_cell].value))
+                print(sheet[memo_cell].value + "  " + str(sheet[date_cell].value) + "  " + str(sheet[amount_cell].value))
 
             stopCondition = easygui.ynbox("would you like to keep inputting expenses?", 'Choice', ('yes', 'no'))
             if (stopCondition == "n"):
