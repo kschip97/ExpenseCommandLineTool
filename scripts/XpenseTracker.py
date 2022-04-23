@@ -55,6 +55,17 @@ def main():
         else:
             print("Please enter a valid response from the options in the dialog box") # TODO: this function needs to be built
     
+    action = easygui.buttonbox("Would you like to continue with tracking you expenses?", "Continue?", ('yes', 'no'))
+
+    if (action == 'yes'):
+        continue
+    if (action == 'no'):
+        print("Thank you for using XpenseTracker!")
+        sys.exit()
+    
+
+
+    
 
     
 def CreateNewExpenseWorkbook():
